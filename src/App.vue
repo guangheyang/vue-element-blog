@@ -1,30 +1,14 @@
 <template>
   <div id="app">
-    <div class="nav-box">
-      <router-link to="/" tag="div" class="logo">
-        <Monster />
-        <div class="blog">杨光贺的个人博客</div>
-      </router-link>
-      <div class="nav-list">
-        <router-link to="/">首页</router-link>
-        <router-link to="/about">关于</router-link>
-        <router-link to="/editBlog">发布</router-link>
-        <router-link to="/personDemo">个人项目</router-link>
-      </div>
-    </div>
-    <div class="container">
-      <transition >
-        <router-view></router-view>
-      </transition>
-    </div>
+    <Layout />
   </div>
 </template>
 <script>
-import Monster from '@/components/Monster'
+import Layout from '@/layout'
 export default {
   name: 'App',
   components: {
-      Monster
+    Layout
   },
   data() {
     return {
@@ -39,11 +23,16 @@ export default {
     font-family: Avenir, Helvetica, Arial, sans-serif;
   }
   .nav-box {
+    position: fixed;
+    top: 0;
+    z-index:999;
     display: flex;
     justify-content: space-between;
     height: 100px;
+    width: 100%;
     line-height: 100px;
     background-color: #db4d6d;
+    box-sizing: border-box;
   }
   .nav-box .logo {
     color: #fff;
@@ -60,13 +49,12 @@ export default {
     font-weight: bold;
   }
   .container {
-      min-width: 1180px;
-      margin: 24px auto 0;
+      margin: 124px auto 0;
       overflow-x: hidden;
+      height: calc(100% - 100px);
   }
   .nav-box{
-    padding-left: 200px;
-    padding-right: 200px;
+    padding:0 24px;
   }
   .v-enter {
     transform: translateX(1000px);

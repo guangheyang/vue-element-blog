@@ -3,56 +3,64 @@
       <template v-for="item in blogList">
           <BlogAbstract :key="item.id" :blog-obj="item" @link-title="clickTitle" />
       </template>
-      <div class="blog-page">
-          <el-pagination
-              small
-              layout="prev, pager, next"
-              :total="50">
-          </el-pagination>
+      <div class="blog-page" v-if="paging.currentPage !== paging.total">
+          <Page :current-page="paging.currentPage" :total-page="paging.total" @click-prev="prevPage" @click-next="nextPage" />
       </div>
   </div>
 </template>
 
 <script>
   import BlogAbstract from '@/components/BlogAbstract'
+  import Page from '@/components/Page'
+  import axios from 'axios'
   export default {
     data() {
       return {
-          blogList: [{
-              id: 1,
-              title: '从 egg-bin 聊到 command line interface Tool',
-              blogAbstract: '> 最近正在看一些关于 egg 方面的东西，其中对于 egg 的运行方式是基于 egg-bin 来处理的，正好可以借此机会通过 egg-bin 来了解 egg 的运行过程以及 egg-bin 在其他场',
-              createTime: '2020-11-23 23:47'
-          },{
-              id: 2,
-              title: '从 egg-bin 聊到 command line interface Tool',
-              blogAbstract: '> 最近正在看一些关于 egg 方面的东西，其中对于 egg 的运行方式是基于 egg-bin 来处理的，正好可以借此机会通过 egg-bin 来了解 egg 的运行过程以及 egg-bin 在其他场',
-              createTime: '2020-11-23 23:47'
-          },{
-              id: 3,
-              title: '从 egg-bin 聊到 command line interface Tool',
-              blogAbstract: '> 最近正在看一些关于 egg 方面的东西，其中对于 egg 的运行方式是基于 egg-bin 来处理的，正好可以借此机会通过 egg-bin 来了解 egg 的运行过程以及 egg-bin 在其他场',
-              createTime: '2020-11-23 23:47'
-          },{
-              id: 4,
-              title: '从 egg-bin 聊到 command line interface Tool',
-              blogAbstract: '> 最近正在看一些关于 egg 方面的东西，其中对于 egg 的运行方式是基于 egg-bin 来处理的，正好可以借此机会通过 egg-bin 来了解 egg 的运行过程以及 egg-bin 在其他场',
-              createTime: '2020-11-23 23:47'
-          }]
+          blogList: [],
+          paging: {
+              currentPage: 1,
+              size: 5,
+              total: 0
+          }
       }
     },
     components: {
-        BlogAbstract
+        BlogAbstract,
+        Page
     },
-      methods: {
-          clickTitle(id) {
-              this.$router.push({
-                  path: '/blog',
-                  name: 'blog',
-                  params:{ id }
-              })
-          }
+    created(){
+        this.getBlogList()
+        axios.get('http://192.168.1.20:12306/totalBlog').then(res => {
+            console.log(res, 'total')
+            this.paging.total = Math.ceil(res.data.data[0].total / this.paging.size)
+
+        })
+    },
+    methods: {
+      clickTitle(id) {
+      this.$router.push({
+         path: '/blog',
+         name: 'blog',
+         params:{ id }
+       })
+      },
+      getBlogList() {
+          axios.get(`http://192.168.1.20:12306/queryBlog?page=${this.paging.currentPage}&size=${this.paging.size}`).then(res => {
+              console.log(res, 'res')
+              this.blogList = res.data.data
+          })
+      },
+      prevPage(currentPage) {
+          currentPage--
+          this.paging.currentPage = currentPage
+          this.getBlogList()
+      },
+      nextPage(currentPage) {
+          currentPage++
+          this.paging.currentPage = currentPage
+          this.getBlogList()
       }
+    }
   }
 </script>
 

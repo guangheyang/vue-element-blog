@@ -7,7 +7,8 @@
             </div>
             <div class="blog-info">
                 <span class="blog-author">杨光贺</span>
-                <span class="blog-created">{{ blogObj.createTime }}</span>
+                <span class="blog-created">发布于{{ blogObj.createTime }}</span>
+                <span>浏览 ({{ blogObj.seeNum }})</span>
             </div>
         </li>
     </ul>
@@ -30,7 +31,7 @@ export default {
     margin: 0 auto 4rem;
     text-align: left;
     list-style: none;
-    padding-bottom: 4rem;
+    padding-bottom: 2rem;
     position: relative;
     border-bottom: 1px solid #ebf2f6;
     .el-link.el-link--default {
@@ -45,8 +46,15 @@ export default {
     .blog-abstract {
         font-size: 1.2rem;
         line-height: 1.9rem;
-        padding: .5rem 0 2.2rem;
+        padding-top: .5rem;
+        height: 92px;
         color: #30363A;
+        display: -webkit-box;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        text-indent: 2rem;
     }
     .blog-info {
         font-size: 1rem;
@@ -54,6 +62,7 @@ export default {
         color: #8492a6;
         text-transform: uppercase;
         font-weight: 500;
+        padding-top: 2.2rem;
         .blog-author {
             padding: 0 .5rem 0 0;
         }

@@ -33,6 +33,7 @@
 
 <script>
 import vabQuill from '@/components/plugins/vabQuill'
+import axios from 'axios'
 export default {
     name: 'Editor',
     components: { vabQuill },
@@ -102,6 +103,12 @@ export default {
                 })
                 if (valid) {
                     this.dialogTableVisible = true
+                    axios.post('http://192.168.1.20:12306/insertBlog', {
+                        title: this.form.title,
+                        data: this.form.content
+                    }).then(res => {
+                        console.log(res)
+                    })
                 } else {
                     return false
                 }

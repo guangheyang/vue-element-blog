@@ -103,12 +103,6 @@ export default {
                 })
                 if (valid) {
                     this.dialogTableVisible = true
-                    axios.post('http://192.168.1.20:12306/insertBlog', {
-                        title: this.form.title,
-                        data: this.form.content
-                    }).then(res => {
-                        console.log(res)
-                    })
                 } else {
                     return false
                 }
@@ -126,7 +120,12 @@ export default {
                 if (valid) {
                     // this.$baseMessage('submit!', 'success')
                     console.log('submit')
-                    console.log(this.form.content)
+                    axios.post('http://192.168.1.20:12306/insertBlog', {
+                        title: this.form.title,
+                        data: this.form.content
+                    }).then(res => {
+                        console.log(res)
+                    })
                 } else {
                     return false
                 }

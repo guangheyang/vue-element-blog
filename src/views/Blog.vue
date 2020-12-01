@@ -11,13 +11,17 @@
                 <div class="news-content" v-html="form.blogAbstract"></div>
             </div>
         </div>
-        <el-backtop target=".content"></el-backtop>
+        <Comment />
     </div>
 </template>
 
 <script>
+import Comment from '@/components/Comment'
 import axios from 'axios';
 export default {
+    components: {
+        Comment
+    },
     data() {
         return {
             form: {},

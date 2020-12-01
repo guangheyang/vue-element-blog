@@ -1,8 +1,9 @@
 <template>
   <div class="home" v-loading="loading">
-      <template v-for="item in blogList">
-          <BlogAbstract :key="item.id" :blog-obj="item" @link-title="clickTitle" />
+      <template v-if="blogList.length > 0">
+          <BlogAbstract v-for="item in blogList" :key="item.id" :blog-obj="item" @link-title="clickTitle" />
       </template>
+      <NoData v-else />
       <div class="blog-page" v-if="showPage">
           <Page :current-page="paging.currentPage" :total-page="paging.total" @click-prev="prevPage" @click-next="nextPage" />
       </div>
@@ -12,6 +13,7 @@
 <script>
   import BlogAbstract from '@/components/BlogAbstract'
   import Page from '@/components/Page'
+  import NoData from '@/components/NoData'
   import axios from 'axios'
   export default {
     data() {
@@ -26,12 +28,16 @@
       }
     },
     computed: {
+        // 符合条件隐藏page
         showPage(){
             let result = true
-            if (this.paging.currentPage !== this.paging.total) {
+            if (this.paging.currentPage === this.paging.total) {
                 result = false
             }
             if (this.paging.total === 0) {
+                result = false
+            }
+            if (this.blogList.length === 0) {
                 result = false
             }
             return result
@@ -39,7 +45,8 @@
     },
     components: {
         BlogAbstract,
-        Page
+        Page,
+        NoData
     },
     created(){
         this.getBlogList()
@@ -61,6 +68,8 @@
           axios.get(`http://192.168.1.20:12306/queryBlog?page=${this.paging.currentPage}&size=${this.paging.size}`).then(res => {
               console.log(res, 'res')
               this.blogList = res.data.data
+              this.loading = false
+          }).catch(() => {
               this.loading = false
           })
       },

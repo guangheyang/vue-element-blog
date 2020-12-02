@@ -5,22 +5,25 @@
             </el-page-header>
         </div>
         <div class="blog">
-            <div style="min-height: 60vh">
+            <div>
                 <h1 class="news-title">{{ form.title }}</h1>
                 <span class="create">{{ form.create }}</span>
                 <div class="news-content" v-html="form.blogAbstract"></div>
             </div>
         </div>
         <Comment />
+        <ShowComment />
     </div>
 </template>
 
 <script>
 import Comment from '@/components/Comment'
+import ShowComment from '@/components/ShowComment'
 import axios from 'axios';
 export default {
     components: {
-        Comment
+        Comment,
+        ShowComment
     },
     data() {
         return {

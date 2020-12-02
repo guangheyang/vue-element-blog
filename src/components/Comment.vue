@@ -8,8 +8,7 @@
                 <el-input type="textarea" v-model="form.desc" :autosize="{ minRows: 3, maxRows: 5}" maxlength="400" show-word-limit placeholder="说点什么吧"  />
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="onSubmit">立即创建</el-button>
-                <el-button>取消</el-button>
+                <el-button type="primary" @click="onSubmit">提交</el-button>
             </el-form-item>
         </el-form>
     </el-card>

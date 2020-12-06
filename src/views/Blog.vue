@@ -55,6 +55,9 @@ export default {
     },
     methods: {
         render() {
+            axios.get(`http://192.168.1.20:12306/addSeeNum?id=${this.id}`).then(res => {
+                console.log(res, 'res')
+            })
             axios.get(`http://192.168.1.20:12306/blogContent?id=${this.id}`).then(res => {
                 this.form = res.data.data[0]
             })

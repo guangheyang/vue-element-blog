@@ -11,7 +11,7 @@
                 <el-input v-model="form.confirm_password" placeholder="再次输入密码" />
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="onSubmit('form')">登录</el-button>
+                <el-button type="primary" @click="onSubmit('form')">立即创建</el-button>
                 <el-button>取消</el-button>
             </el-form-item>
         </el-form>
@@ -28,11 +28,11 @@ export default {
                 confirm_password: ''
             },
             rules: {
-                user: [
+                user_name: [
                     { required: true, message: '请输入手机号或用户名', trigger: 'blur' }
                 ],
                 password: [
-                    { required: true, message: '请输入密码', trigger: 'change' }
+                    { required: true, message: '请输入密码', trigger: 'blur' }
                 ],
                 confirm_password: [
                     { required: true, message: '请输入密码', trigger: 'change' }
@@ -45,11 +45,10 @@ export default {
             this.$refs[form].validate((valid) => {
                 if (valid) {
                     const { user_name, password } = this.form
-                    axios.get(`http://192.168.1.20:12306/queryUser?user_name=${user_name}`).then(res => {
+                    axios.post('http://192.168.1.20:12306/insertUser', {
+                        user_name, password, avatar_id: Math.floor(Math.random() * 27) + 1
+                    }).then(res => {
                         console.log(res, 'res')
-                        if (password !== res.data.data[0].password) {
-                            alert('密码错误')
-                        }
                     })
                 } else {
                     console.log('error submit!!');
@@ -61,8 +60,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.box-card {
-    max-width: 480px;
-    margin: 40px auto 0;
-}
+    .box-card {
+        max-width: 480px;
+        margin: 40px auto 0;
+    }
 </style>

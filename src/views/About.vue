@@ -44,22 +44,10 @@
           <el-tab-pane label="最新文章" name="first">
             <div class="block">
               <el-timeline>
-                <el-timeline-item timestamp="2018/4/12" placement="top">
+                <el-timeline-item v-for="(item, index) in blogList" :key="index" :timestamp="item.createTime" placement="top">
                   <el-card>
-                    <h4>更新 Github 模板</h4>
-                    <p>王小虎 提交于 2018/4/12 20:46</p>
-                  </el-card>
-                </el-timeline-item>
-                <el-timeline-item timestamp="2018/4/3" placement="top">
-                  <el-card>
-                    <h4>更新 Github 模板</h4>
-                    <p>王小虎 提交于 2018/4/3 20:46</p>
-                  </el-card>
-                </el-timeline-item>
-                <el-timeline-item timestamp="2018/4/2" placement="top">
-                  <el-card>
-                    <h4>更新 Github 模板</h4>
-                    <p>王小虎 提交于 2018/4/2 20:46</p>
+                    <h4 style="padding-bottom: 12px">{{ item.title }}</h4>
+                    <p>杨光贺 发布于 {{ item.createTime }}</p>
                   </el-card>
                 </el-timeline-item>
               </el-timeline>
@@ -141,6 +129,7 @@
       actualData: [120, 82, 91, 154, 162, 140, 130]
     }
   }
+import axios from 'axios'
 import LineEchart from '@/components/LineEchart'
 export default {
   components: {
@@ -162,8 +151,20 @@ export default {
         type: [],
         resource: '',
         desc: ''
-      }
+      },
+      blogList: [],
+      loading: false
     };
+  },
+  created() {
+    this.loading = true
+    axios.get(`http://192.168.1.20:12306/queryBlog?page=1&size=5`).then(res => {
+      console.log(res, 'res')
+      this.blogList = res.data.data
+      this.loading = false
+    }).catch(() => {
+      this.loading = false
+    })
   },
   methods: {
     handleClose(tag) {

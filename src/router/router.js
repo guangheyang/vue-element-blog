@@ -22,10 +22,21 @@ const routes = [{
     path: '/personDemo',
     name: 'personDemo',
     component: () => import('../views/Activity')
-  },{
+  },
+  {
     path: '/about',
     name: 'about',
     component: () => import('../views/About')
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('../views/Login')
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: () => import('../views/Register')
   }
 ]
 export default new VueRouter({

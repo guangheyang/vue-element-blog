@@ -34,6 +34,7 @@
 import Comment from '@/components/Comment'
 import ShowComment from '@/components/ShowComment'
 import axios from 'axios';
+import { addSeeNum, blogContent, queryBlogComment } from '@/api/blog'
 export default {
     components: {
         Comment,
@@ -55,15 +56,23 @@ export default {
     },
     methods: {
         render() {
-            axios.get(`http://192.168.1.20:12306/addSeeNum?id=${this.id}`).then(res => {
-                console.log(res, 'res')
+            const { id } = this
+            addSeeNum(id)
+            // axios.get(`http://192.168.1.20:12306/addSeeNum?id=${this.id}`).then(res => {
+            //     console.log(res, 'res')
+            // })
+            blogContent(id).then(res => {
+                this.form = res.data[0]
             })
-            axios.get(`http://192.168.1.20:12306/blogContent?id=${this.id}`).then(res => {
-                this.form = res.data.data[0]
+            // axios.get(`http://192.168.1.20:12306/blogContent?id=${this.id}`).then(res => {
+            //     this.form = res.data.data[0]
+            // })
+            queryBlogComment(id).then(res => {
+                this.comments = res.data
             })
-            axios.get(`http://192.168.1.20:12306/queryBlogComment?blog_id=${this.id}`).then(res => {
-                this.comments = res.data.data
-            })
+            // axios.get(`http://192.168.1.20:12306/queryBlogComment?blog_id=${this.id}`).then(res => {
+            //     this.comments = res.data.data
+            // })
         },
         goBack() {
            this.$router.go(-1)

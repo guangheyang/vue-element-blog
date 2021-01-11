@@ -48,7 +48,12 @@ export default {
                     axios.post('http://192.168.1.20:12306/insertUser', {
                         user_name, password, avatar_id: Math.floor(Math.random() * 27) + 1
                     }).then(res => {
-                        console.log(res, 'res')
+                        if (res.status) {
+                            this.$router.push({
+                                path: '/login',
+                                name: 'Login'
+                            })
+                        }
                     })
                 } else {
                     console.log('error submit!!');
@@ -62,6 +67,6 @@ export default {
 <style lang="scss" scoped>
     .box-card {
         max-width: 480px;
-        margin: 40px auto 0;
+        margin: 40px auto 10rem;
     }
 </style>

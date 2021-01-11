@@ -14,7 +14,7 @@
   import BlogAbstract from '@/components/BlogAbstract'
   import Page from '@/components/Page'
   import NoData from '@/components/NoData'
-  import axios from 'axios'
+  import { queryBlog, totalBlog } from '@/api/blog'
   export default {
     data() {
       return {
@@ -50,9 +50,8 @@
     },
     created(){
         this.getBlogList()
-        axios.get('http://192.168.1.20:12306/totalBlog').then(res => {
-            console.log(res, 'total')
-            this.paging.total = Math.ceil(res.data.data[0].total / this.paging.size)
+        totalBlog().then(res => {
+            this.paging.total = Math.ceil(res.data[0].total / this.paging.size)
         })
     },
     methods: {
@@ -65,11 +64,9 @@
       },
       getBlogList() {
           this.loading = true
-          axios.get(`http://192.168.1.20:12306/queryBlog?page=${this.paging.currentPage}&size=${this.paging.size}`).then(res => {
-              console.log(res, 'res')
-              this.blogList = res.data.data
-              this.loading = false
-          }).catch(() => {
+          const { currentPage: page, size } = this.paging
+          queryBlog({ page, size }).then(res => {
+              this.blogList = res.data
               this.loading = false
           })
       },

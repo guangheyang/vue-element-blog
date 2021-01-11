@@ -158,7 +158,7 @@ export default {
   },
   created() {
     this.loading = true
-    axios.get(`http://192.168.1.20:12306/queryBlog?page=1&size=5`).then(res => {
+    axios.get(`http://192.168.1.30:12306/queryBlog?page=1&size=5`).then(res => {
       console.log(res, 'res')
       this.blogList = res.data.data
       this.loading = false

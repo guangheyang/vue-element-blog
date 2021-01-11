@@ -10,9 +10,10 @@
             <el-form-item label="确认密码" prop="confirm_password">
                 <el-input v-model="form.confirm_password" placeholder="再次输入密码" />
             </el-form-item>
-            <el-form-item>
-                <el-button type="primary" @click="onSubmit('form')">登录</el-button>
-                <el-button>取消</el-button>
+            <el-form-item style="text-align: center">
+                <el-button type="text" style="margin-left: -4rem" @click="$router.push({path: 'register'})">注册账号</el-button>
+                <el-button type="text" @click="onSubmit('form')">登录</el-button>
+                <el-button type="text" @click="$router.go(-1)">取消</el-button>
             </el-form-item>
         </el-form>
     </el-card>
@@ -49,6 +50,10 @@ export default {
                         console.log(res, 'res')
                         if (password !== res.data.data[0].password) {
                             alert('密码错误')
+                        } else {
+                            this.$router.push({
+                                path: '/'
+                            })
                         }
                     })
                 } else {
@@ -63,6 +68,6 @@ export default {
 <style lang="scss" scoped>
 .box-card {
     max-width: 480px;
-    margin: 40px auto 0;
+    margin: 40px auto 10rem;
 }
 </style>

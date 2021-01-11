@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="wrap">
         <Navigation />
         <div class="container">
             <transition >
@@ -22,11 +22,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    .wrap {
+        min-height: 720px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
     .container {
         margin: 124px auto 0;
         overflow-x: hidden;
         padding: 0 1rem;
-        height: calc(100% - 100px);
     }
     .nav-box{
         padding:0 24px;

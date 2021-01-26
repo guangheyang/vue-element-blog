@@ -5,7 +5,7 @@
             <div class="blog-abstract" v-html="blogObj.blogAbstract"></div>
             <div class="blog-info">
                 <span class="blog-author">杨光贺</span>
-                <span class="blog-created">发布于{{ blogObj.createTime }}</span>
+                <span class="blog-created">发布于{{ blogObj.createTime | timeStr }}</span>
                 <span>浏览 ({{ blogObj.seeNum }})</span>
             </div>
         </li>

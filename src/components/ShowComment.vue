@@ -9,7 +9,7 @@
                 <div class="info">
                     <div class="top">
                         <span class="name" v-html="item.name"></span>
-                        <span class="date">{{item.create_time}}</span>
+                        <span class="date">{{item.create_time | timeStr }}</span>
                     </div>
                     <span v-if="item.reply">回复</span>
                     <span v-if="item.reply" class="reply">{{ item.reply }}</span>

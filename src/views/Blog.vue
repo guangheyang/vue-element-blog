@@ -7,7 +7,7 @@
         <div class="blog">
             <div>
                 <h1 class="news-title">{{ form.title }}</h1>
-                <span class="create">{{ form.create }}</span>
+                <span class="create">{{ form.createTime | timeMMMM }}</span>
                 <div class="news-content" v-html="form.blogAbstract"></div>
             </div>
         </div>
@@ -35,6 +35,7 @@ import Comment from '@/components/Comment'
 import ShowComment from '@/components/ShowComment'
 import axios from 'axios';
 import { addSeeNum, blogContent, queryBlogComment } from '@/api/blog'
+import { insertComment } from '@/api/comment'
 export default {
     components: {
         Comment,
@@ -58,37 +59,28 @@ export default {
         render() {
             const { id } = this
             addSeeNum(id)
-            // axios.get(`http://192.168.1.20:12306/addSeeNum?id=${this.id}`).then(res => {
-            //     console.log(res, 'res')
-            // })
             blogContent(id).then(res => {
                 this.form = res.data[0]
             })
-            // axios.get(`http://192.168.1.20:12306/blogContent?id=${this.id}`).then(res => {
-            //     this.form = res.data.data[0]
-            // })
             queryBlogComment(id).then(res => {
                 this.comments = res.data
             })
-            // axios.get(`http://192.168.1.20:12306/queryBlogComment?blog_id=${this.id}`).then(res => {
-            //     this.comments = res.data.data
-            // })
         },
         goBack() {
            this.$router.go(-1)
         },
         onSubmit(form) {
-           axios.post(`http://192.168.1.20:12306/insertComment`,{
-                blog_id: this.id,
-                name: form.name,
-                desc: form.desc,
-                avatar_id: Math.floor(Math.random() * 27) + 1
-            }).then(res => {
-                if (res.status) {
-                    this.render()
-                    form.name = ''
-                    form.desc = ''
-                }
+           insertComment({
+               blog_id: this.id,
+               name: form.name,
+               desc: form.desc,
+               avatar_id: Math.floor(Math.random() * 27) + 1
+           }).then(res => {
+               if (res.status) {
+                   this.render()
+                   form.name = ''
+                   form.desc = ''
+               }
            })
         },
         replyComments(reply) {

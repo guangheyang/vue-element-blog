@@ -1,14 +1,14 @@
 <template>
     <el-card class="box-card">
-        <el-form ref="form" :model="form" label-width="80px">
-            <el-form-item label="昵称">
+        <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+            <el-form-item label="昵称" prop="name">
                 <el-input v-model="form.name" maxlength="10" show-word-limit placeholder="你的昵称" style="width: 228px;" />
             </el-form-item>
-            <el-form-item label="评论">
+            <el-form-item label="评论" prop="desc">
                 <el-input type="textarea" v-model="form.desc" :autosize="{ minRows: 3, maxRows: 5}" maxlength="400" show-word-limit placeholder="说点什么吧"  />
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="$emit('comment-submit', form)">提交</el-button>
+                <el-button type="primary" @click="submitForm('form')">提交</el-button>
             </el-form-item>
         </el-form>
     </el-card>
@@ -20,8 +20,27 @@ export default {
             form: {
                 name: '',
                 desc: ''
+            },
+            rules: {
+                name: [
+                    { required: true, message: '请输入你的昵称', trigger: 'blur' }
+                ],
+                desc: [
+                    { required: true, message: '请填写评论内容', trigger: 'blur' }
+                ]
             }
         }
+    },
+    methods: {
+        submitForm(formName) {
+            this.$refs[formName].validate((valid) => {
+                if (valid) {
+                    this.$emit('comment-submit', this.form)
+                } else {
+                    return false;
+                }
+            });
+        },
     }
 }
 </script>

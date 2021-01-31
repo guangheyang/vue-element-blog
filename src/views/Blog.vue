@@ -11,20 +11,22 @@
                 <div class="news-content" v-html="form.blogAbstract"></div>
             </div>
         </div>
-        <Comment @comment-submit="onSubmit" />
+        <el-card class="box-card">
+            <Comment @comment-submit="onSubmit" />
+        </el-card>
         <ShowComment :comments="comments" @reply-comments="replyComments" />
         <el-dialog :visible.sync="dialogFormVisible" center>
-            <el-form :model="reply" label-width="80px">
-                <el-form-item label="昵称">
+            <el-form ref="reply" :model="reply" :rules="rules" label-width="80px">
+                <el-form-item label="昵称" prop="name">
                     <el-input v-model="reply.name" maxlength="10" show-word-limit placeholder="你的昵称" style="width: 228px;" />
                 </el-form-item>
-                <el-form-item label="评论">
+                <el-form-item label="评论" prop="desc">
                     <el-input type="textarea" v-model="reply.desc" :autosize="{ minRows: 3, maxRows: 5}" maxlength="400" show-word-limit :placeholder="`回复${replyName}`"  />
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
                 <el-button @click="dialogFormVisible = false">取 消</el-button>
-                <el-button type="primary" @click="onReply(reply)">确 定</el-button>
+                <el-button type="primary" @click="onReply('reply')">确 定</el-button>
             </div>
         </el-dialog>
     </div>
@@ -33,7 +35,6 @@
 <script>
 import Comment from '@/components/Comment'
 import ShowComment from '@/components/ShowComment'
-import axios from 'axios';
 import { addSeeNum, blogContent, queryBlogComment } from '@/api/blog'
 import { insertComment } from '@/api/comment'
 export default {
@@ -48,8 +49,19 @@ export default {
             comments: [],
             formLabelWidth: '120px',
             dialogFormVisible: false,
-            reply: {},
-            replyName: ''
+            reply: {
+                name: '',
+                desc: ''
+            },
+            replyName: '',
+            rules: {
+                name: [
+                    { required: true, message: '请输入你的昵称', trigger: 'blur' }
+                ],
+                desc: [
+                    { required: true, message: '请填写评论内容', trigger: 'blur' }
+                ]
+            }
         }
     },
     created() {
@@ -69,37 +81,36 @@ export default {
         goBack() {
            this.$router.go(-1)
         },
+        insertComment(data) {
+            insertComment({
+                blog_id: this.id,
+                name: data.name,
+                desc: data.desc,
+                reply: this.replyName,
+                avatar_id: Math.floor(Math.random() * 27) + 1
+            }).then(res => {
+                if (res.status) {
+                    this.render()
+                    data.name = ''
+                    data.desc = ''
+                    data.reply = ''
+                }
+            })
+        },
         onSubmit(form) {
-           insertComment({
-               blog_id: this.id,
-               name: form.name,
-               desc: form.desc,
-               avatar_id: Math.floor(Math.random() * 27) + 1
-           }).then(res => {
-               if (res.status) {
-                   this.render()
-                   form.name = ''
-                   form.desc = ''
-               }
-           })
+           this.insertComment(form)
         },
         replyComments(reply) {
             this.dialogFormVisible = true
             this.replyName = reply.name
         },
-        onReply(reply) {
-            this.dialogFormVisible = false
-            axios.post(`http://192.168.1.20:12306/insertComment`,{
-                blog_id: this.id,
-                name: reply.name,
-                reply: this.replyName,
-                desc: reply.desc,
-                avatar_id: Math.floor(Math.random() * 27) + 1
-            }).then(res => {
-                if (res.status) {
-                    this.render()
-                    reply.name = ''
-                    reply.desc = ''
+        onReply(formName) {
+            this.$refs[formName].validate((valid) => {
+                if (valid) {
+                    this.insertComment(this.reply)
+                    this.dialogFormVisible = false
+                } else {
+                    return false
                 }
             })
         }

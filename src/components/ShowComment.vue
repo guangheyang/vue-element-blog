@@ -40,6 +40,7 @@ export default {
             display: flex;
             align-items: center;
             margin-bottom: 24px;
+            cursor: pointer;
             .info {
                 margin-left: 12px;
                 min-height: 40px;

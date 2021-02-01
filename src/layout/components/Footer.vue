@@ -7,7 +7,7 @@
         display: block;
         text-align: center;
         color: #4e6e8e;
-        font-size: 14px;
+        font-size: 0.857rem;
         /*border-top: 1px solid #eaecef;*/
     }
 </style>

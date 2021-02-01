@@ -1,7 +1,7 @@
 <template>
-    <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+    <el-form ref="form" :model="form" :rules="rules" label-width="5rem">
     <el-form-item label="昵称" prop="name">
-        <el-input v-model="form.name" maxlength="10" show-word-limit placeholder="你的昵称" style="width: 228px;" />
+        <el-input v-model="form.name" maxlength="10" show-word-limit placeholder="你的昵称" style="width: 14.25rem;" />
     </el-form-item>
     <el-form-item label="评论" prop="desc">
         <el-input type="textarea" v-model="form.desc" :autosize="{ minRows: 3, maxRows: 5}" maxlength="400" show-word-limit placeholder="说点什么吧"  />

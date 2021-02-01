@@ -23,22 +23,21 @@ export default {
 
 <style lang="scss" scoped>
     .wrap {
-        min-height: 720px;
+        min-height: 45rem;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
     }
     .container {
-        margin: 124px auto 0;
+        margin: 7.75rem 1rem 0;
         overflow-x: hidden;
-        padding: 0 1rem;
     }
     .nav-box{
-        padding:0 24px;
+        padding:0 1.5rem;
     }
     .v-enter {
-        transform: translateX(1000px);
+        transform: translateX(60rem);
     }
     .v-enter-active{
         transition: all .5s;

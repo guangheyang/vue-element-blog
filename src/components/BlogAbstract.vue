@@ -6,7 +6,7 @@
             <div class="blog-info">
                 <span class="blog-author">杨光贺</span>
                 <span class="blog-created">发布于{{ blogObj.createTime | timeStr }}</span>
-                <span>浏览 ({{ blogObj.seeNum }})</span>
+                <span class="blog-see">浏览 ({{ blogObj.seeNum }})</span>
             </div>
         </li>
     </ul>
@@ -26,7 +26,7 @@ export default {
 <style lang="scss" scoped>
 .content {
     .main-item {
-        max-width: 880px;
+        max-width: 55rem;
         margin: 0 auto 2rem;
         text-align: left;
         list-style: none;
@@ -62,13 +62,15 @@ export default {
             text-transform: uppercase;
             font-weight: 500;
             padding-top: 2.2rem;
+            width: 22rem;
             .blog-author {
                 padding: 0 .5rem 0 0;
             }
             .blog-created {
-                padding: 0 1rem;
-                margin-left: .5rem;
+                padding: 0 .5rem;
                 border-left: 1px solid #d5dbde;
+            }
+            .blog-see {
             }
         }
     }

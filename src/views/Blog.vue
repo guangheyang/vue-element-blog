@@ -1,24 +1,25 @@
 <template>
     <div class="content">
         <div class="blogHeader">
-            <el-page-header @back="goBack" content="博客内容">
-            </el-page-header>
+            <el-page-header @back="goBack" content="博客内容" />
         </div>
         <div class="blog">
-            <div>
-                <h1 class="news-title">{{ form.title }}</h1>
-                <span class="create">{{ form.createTime | timeMMMM }}</span>
-                <div class="news-content" v-html="form.blogAbstract"></div>
-            </div>
+            <el-row>
+                <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+                    <h1 class="news-title">{{ form.title }}</h1>
+                    <span class="create">{{ form.createTime | timeMMMM }}</span>
+                    <div class="news-content" v-html="form.blogAbstract"></div>
+                </el-col>
+            </el-row>
         </div>
         <el-card class="box-card">
             <Comment @comment-submit="onSubmit" />
         </el-card>
         <ShowComment :comments="comments" @reply-comments="replyComments" />
-        <el-dialog :visible.sync="dialogFormVisible" center>
-            <el-form ref="reply" :model="reply" :rules="rules" label-width="80px">
+        <el-dialog :visible.sync="dialogFormVisible" center width="80%" top="30vh">
+            <el-form ref="reply" :model="reply" :rules="rules" label-width="5rem">
                 <el-form-item label="昵称" prop="name">
-                    <el-input v-model="reply.name" maxlength="10" show-word-limit placeholder="你的昵称" style="width: 228px;" />
+                    <el-input v-model="reply.name" maxlength="10" show-word-limit placeholder="你的昵称" />
                 </el-form-item>
                 <el-form-item label="评论" prop="desc">
                     <el-input type="textarea" v-model="reply.desc" :autosize="{ minRows: 3, maxRows: 5}" maxlength="400" show-word-limit :placeholder="`回复${replyName}`"  />
@@ -47,7 +48,7 @@ export default {
             form: {},
             id: this.$route.params.id,
             comments: [],
-            formLabelWidth: '120px',
+            formLabelWidth: '7.5rem',
             dialogFormVisible: false,
             reply: {
                 name: '',
@@ -119,19 +120,17 @@ export default {
 </script>
 <style lang="scss" scoped>
     .content {
-        width: 880px;
+        max-width: 55rem;
         margin: 0 auto;
         .blogHeader {
-            /*position: fixed;*/
-            /*top: 100px;*/
-            margin: 2rem 0;
+            margin: 1rem 0;
         }
     }
     .news-title {
-        padding: 10px 0 20px;
+        padding: 0.625rem 0 1.25rem;
         text-align: left;
         color: #2e2e2e;
-        font-size: 3.2rem;
+        font-size: 3rem;
         font-weight: 700;
     }
     .create {
@@ -145,8 +144,8 @@ export default {
         font-size: 1.2rem;
         text-indent: 2em;
         img {
-            width: 600px;
-            margin-bottom: 10px;
+            max-width: 37.5rem;
+            margin-bottom: 0.625px;
         }
     }
 </style>

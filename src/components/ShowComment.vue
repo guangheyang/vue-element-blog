@@ -35,25 +35,26 @@ export default {
 </script>
 <style lang="scss" scoped>
     .box-card {
-        margin-top: 24px;
+        margin-top: 1.5rem;
         .comment {
             display: flex;
             align-items: center;
-            margin-bottom: 24px;
+            margin-bottom: 1.5rem;
             cursor: pointer;
             .info {
-                margin-left: 12px;
-                min-height: 40px;
+                margin-left: 0.75rem;
+                min-height: 2.5rem;
+                flex: 1;
                 .top {
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                     padding-bottom: 0.5rem;
-                    width: 770px;
+                    /*/width: 16.125rem;*/
                     .name {
                         display: block;
                         color: #1989fa;
-                        font-size: 14px;
+                        font-size: 0.875rem;
                     }
                     .desc {
                         display: block;

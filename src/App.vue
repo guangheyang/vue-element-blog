@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" v-cloak>
     <Layout />
   </div>
 </template>
@@ -14,55 +14,24 @@ export default {
     return {
       show: false
     }
+  },
+  created() {
+    let wrap = document.getElementById('monster_wrap');
+    if (wrap !== null) {
+      setTimeout(() => {
+        document.body.removeChild(wrap);
+      }, 1000)
+    }
   }
 }
 </script>
 
 <style scoped>
+  /*防止刷新时闪烁*/
+  [v-cloak] {
+    display: none;
+  }
   #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
-  }
-  .nav-box {
-    position: fixed;
-    top: 0;
-    z-index:999;
-    display: flex;
-    justify-content: space-between;
-    height: 100px;
-    width: 100%;
-    line-height: 100px;
-    background-color: #db4d6d;
-    box-sizing: border-box;
-  }
-  .nav-box .logo {
-    color: #fff;
-    display: flex;
-    font-size: 20px;
-    cursor: pointer;
-  }
-  .nav-list a {
-    margin-left: 40px;
-    color: #fff;
-    text-decoration: none;
-  }
-  .nav-list a.link-exact-active {
-    font-weight: bold;
-  }
-  .container {
-      margin: 124px auto 0;
-      overflow-x: hidden;
-      height: calc(100% - 100px);
-  }
-  .nav-box{
-    padding:0 24px;
-  }
-  .v-enter {
-    transform: translateX(1000px);
-  }
-  .v-enter-active{
-    transition: all .5s;
-  }
-  .v-enter-to {
-    transform: translateX(0px);
   }
 </style>

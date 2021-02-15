@@ -3,7 +3,7 @@
       <template v-if="blogList.length > 0">
           <BlogAbstract v-for="item in blogList" :key="item.id" :blog-obj="item" @link-title="clickTitle" />
       </template>
-      <NoData v-else />
+      <NoData v-else style="display: none" />
       <div class="blog-page" v-if="showPage">
           <Page :current-page="paging.currentPage" :total-page="paging.total" @click-prev="prevPage" @click-next="nextPage" />
       </div>

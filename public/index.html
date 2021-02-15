@@ -7,169 +7,132 @@
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
     <style>
-      /**{*/
-      /*  margin:0px;*/
-      /*  padding: 0px;*/
-      /*}*/
-      /*html,body{*/
-      /*  width: 100%;*/
-      /*  height: 100%;*/
-      /*  background-color: #db4d6d;*/
-      /*  display: flex;*/
-        水平居中
-        /*justify-content: center;*/
-        垂直居中
-        /*align-items: center;*/
-      /*}*/
-
-      /*.monster{*/
-      /*  position: relative;*/
-      /*  width: 110px;*/
-      /*  height: 100px;*/
-      /*  border-radius: 20px;*/
-      /*  background-color: #e55a54;*/
-      /*  margin: 10px;*/
-      /*  display: flex;*/
-      /*  justify-content: center;*/
-      /*  align-items: center;*/
-      /*  flex-direction: column;*/
-      /*  box-shadow: 0 10px 20px rgba(0,0,0,0.2);*/
-      /*  animation: jump 0.8s linear infinite alternate;*/
-      /*}*/
-      /*.monsterText,*/
-      /*h3{*/
-      /*  color: #fff;*/
-      /*}*/
-      /*.monster .eye{*/
-      /*  width: 40%;*/
-      /*  height: 40%;*/
-      /*  border-radius: 50%;*/
-      /*  margin: 10px;*/
-      /*  background-color: #fff;*/
-      /*  display: flex;*/
-      /*  justify-content: center;*/
-      /*  align-items: center;*/
-      /*  flex-direction: column;*/
-      /*}*/
-      /*.monster .mouth{*/
-      /*  width: 32%;*/
-      /*  height: 12px;*/
-      /*  border-radius: 12px;*/
-      /*  background-color: #fff;*/
-      /*}*/
-      /*.monster .eye .eyeBall {*/
-      /*  width: 50%;*/
-      /*  height: 50%;*/
-      /*  border-radius: 50%;*/
-      /*  background-color: #0c4475;*/
-      /*  animation: eyemove 1.6s linear infinite alternate;*/
-      /*}*/
-      /*.monster::before,*/
-      /*.monster::after{*/
-      /*  content: '';*/
-      /*  top: -10px;*/
-      /*  left: 50%;*/
-      /*  display: block;*/
-      /*  width: 20%;*/
-      /*  height: 10px;*/
-      /*  border-radius: 10px;*/
-      /*  background-color: #fff;*/
-      /*  position: absolute;*/
-      /*}*/
-      /*.monster::before{*/
-      /*  transform: translateX(-70%) rotate(45deg);*/
-      /*}*/
-      /*.monster::after{*/
-      /*  transform: translateX(-30%) rotate(-45deg);*/
-      /*}*/
-      /*.monster.blue{*/
-      /*  background-color: #0c4475;*/
-      /*  animation-delay: 0.5s;*/
-      /*}*/
-      /*.monster.blue .eye .eyeBall {*/
-      /*  background-color: #e55a54;*/
-      /*  animation-delay: 0.5s;*/
-      /*}*/
-      /*.monster.blue .mouth{*/
-      /*  background-color: #db4d6d;*/
-      /*}*/
-      /*@keyframes jump {*/
-      /*  50%{*/
-      /*    top:0;*/
-      /*    box-shadow: 0 10px 20px rgba(0,0,0,0.2);*/
-      /*  }*/
-      /*  100%{*/
-      /*    top: -50px;*/
-      /*    box-shadow: 0 100px 20px rgba(0,0,0,0.1);*/
-      /*  }*/
-      /*}*/
-      /*@keyframes eyemove{*/
-      /*  0%,*/
-      /*  10%{*/
-      /*    transform: translateX(-50%);*/
-      /*  }*/
-      /*  90%,*/
-      /*  100%{*/
-      /*    transform: translateX(50%);*/
-      /*  }*/
-      /*}*/
-      /*.pageLoading{*/
-      /*  width: 100%;*/
-      /*  height: 100%;*/
-      /*  background-color: #0c4475;*/
-        基于窗口定位
-        /*position: fixed;*/
-        /*top: 0;*/
-        /*left: 0;*/
-        /*display: flex;*/
-        /*justify-content: center;*/
-        /*align-items: center;*/
-        /*flex-direction: column;*/
-        /*transition: opacity 1s;*/
-        /*animation: change 2s linear;*/
-      /*}*/
-      /*.pageLoading .loading{*/
-      /*  width: 200px;*/
-      /*  height: 8px;*/
-      /*  background-color: #fff;*/
-      /*  border-radius:5px;*/
-      /*  margin-top: 50px;*/
-      /*  overflow: hidden;*/
-      /*}*/
-      /*.pageLoading .loading .bar{*/
-      /*  width: 0%;*/
-      /*  height: 100%;*/
-      /*  background-color: #db4d6d;*/
-      /*  animation: colorchange 1s linear;*/
-      /*}*/
-      /*.pageLoading.complete .monster{*/
-      /*  transition: 1s;*/
-      /*  transform: scale(0.1) rotateZ(360deg);*/
-      /*}*/
+     #monster_wrap{
+       position: absolute;
+       top: 0;
+       left: 0;
+       width: 100%;
+       min-height: 100vh;
+       background-color: #db4d6d;
+       display: flex;
+       /*水平居中*/
+       justify-content: center;
+       /*垂直居中*/
+       align-items: center;
+       z-index: 1000;
+     }
+      .monster{
+        position: relative;
+        width: 110px;
+        height: 100px;
+        border-radius: 20px;
+        background-color: #e55a54;
+        margin: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        animation: jump 0.8s linear infinite alternate;
+      }
+      .monsterText,
+      h3{
+        color: #fff;
+      }
+      .monster .eye{
+        width: 40%;
+        height: 40%;
+        border-radius: 50%;
+        margin: 10px;
+        background-color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      .monster .mouth{
+        width: 32%;
+        height: 12px;
+        border-radius: 12px;
+        background-color: #fff;
+      }
+      .monster .eye .eyeBall {
+        width: 50%;
+        height: 50%;
+        border-radius: 50%;
+        background-color: #0c4475;
+        animation: eyemove 1.6s linear infinite alternate;
+      }
+      .monster::before,
+      .monster::after{
+        content: '';
+        top: -10px;
+        left: 50%;
+        display: block;
+        width: 20%;
+        height: 10px;
+        border-radius: 10px;
+        background-color: #fff;
+        position: absolute;
+      }
+      .monster::before{
+        transform: translateX(-70%) rotate(45deg);
+      }
+      .monster::after{
+        transform: translateX(-30%) rotate(-45deg);
+      }
+      .monster.blue{
+        background-color: #0c4475;
+        animation-delay: 0.5s;
+      }
+      .monster.blue .eye .eyeBall {
+        background-color: #e55a54;
+        animation-delay: 0.5s;
+      }
+      .monster.blue .mouth{
+        background-color: #db4d6d;
+      }
+      @keyframes jump {
+        50%{
+          top:0;
+          box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        100%{
+          top: -50px;
+          box-shadow: 0 100px 20px rgba(0,0,0,0.1);
+        }
+      }
+      @keyframes eyemove{
+        0%,
+        10%{
+          transform: translateX(-50%);
+        }
+        90%,
+        100%{
+          transform: translateX(50%);
+        }
+      }
     </style>
   </head>
   <body>
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-<!--    <div id="app"></div>-->
-    <div id="app">
-<!--      <h2 class="monsterText">你好，欢迎来到-->
-<!--        <br>杨光贺的博客</h2>-->
-<!--      <h3 class="removeText"></h3>-->
-<!--    </div>-->
-<!--    <div class="monster ">-->
-<!--      <div class="eye">-->
-<!--        <div class="eyeBall"></div>-->
-<!--      </div>-->
-<!--      <div class="mouth"></div>-->
-<!--    </div>-->
-<!--    <div class="monster blue">-->
-<!--      <div class="eye">-->
-<!--        <div class="eyeBall"></div>-->
-<!--      </div>-->
-<!--      <div class="mouth"></div>-->
-<!--    </div>-->
+    <div id="monster_wrap">
+      <div class="monster ">
+        <div class="eye">
+          <div class="eyeBall"></div>
+        </div>
+        <div class="mouth"></div>
+      </div>
+      <div class="monster blue">
+        <div class="eye">
+          <div class="eyeBall"></div>
+        </div>
+        <div class="mouth"></div>
+      </div>
+    </div>
+    <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
 </html>

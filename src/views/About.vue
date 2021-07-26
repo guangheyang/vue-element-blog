@@ -1,20 +1,20 @@
 <template>
   <div class="about">
-    <el-row :gutter="30">
+    <el-row>
       <el-col :xs="24" :sm="11" :md="8" :lg="7" :xl="7">
         <div class="left">
           <el-card class="box-card">
             <div class="top">
               <el-avatar class="avatar" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
-              <div class="name">杨光贺</div>
-              <div class="every">每日一句</div>
+              <div class="name">{{ info.name }}</div>
+              <div class="every">{{ info.sentence }}</div>
             </div>
             <div class="info">
-              <div class="el-icon-s-platform"><span class="text">前端工程师</span></div>
-              <div class="el-icon-office-building"><span class="text">杭州珞珈数据</span></div>
-              <div class="el-icon-location-information"><span class="text">浙江省杭州市</span></div>
-              <div class="el-icon-phone-outline"><span class="text">18846059565</span></div>
-              <div class="el-icon-message"><span class="text">guangheyang@hotmail.com</span></div>
+              <div class="el-icon-s-platform"><span class="text">{{ info.occupation }}</span></div>
+              <div class="el-icon-office-building"><span class="text">{{ info.company }}</span></div>
+              <div class="el-icon-location-information"><span class="text">{{ info.nativePlace }}</span></div>
+              <div class="el-icon-phone-outline"><span class="text">{{ info.phone }}</span></div>
+              <div class="el-icon-message"><span class="text">{{ info.email }}</span></div>
             </div>
             <el-divider />
             <div class="tag">
@@ -66,7 +66,7 @@
               <el-tab-pane label="活跃状况" name="third">
                 <LineEchart :chart-data="lineChartData" :width="'50rem'" ></LineEchart>
               </el-tab-pane>
-              <el-tab-pane label="类别占比" name="wrw">
+              <el-tab-pane label="类别占比" name="four">
                 <LineEchart :chart-data="lineChartData" :width="'50rem'" ></LineEchart>
               </el-tab-pane>
             </el-tabs>
@@ -95,8 +95,8 @@
       actualData: [120, 82, 91, 154, 162, 140, 130]
     }
   }
-import axios from 'axios'
 import LineEchart from '@/components/LineEchart'
+import { queryBlog } from '@/api/about'
 export default {
   components: {
     LineEchart
@@ -106,8 +106,17 @@ export default {
       dynamicTags: ['标签一', '标签二', '标签三'],
       inputVisible: false,
       inputValue: '',
-      activeName: 'second',
+      activeName: 'first',
       lineChartData: lineChartData.newVisitis,
+      info: {
+        name: '杨光贺',
+        occupation: '前端工程师',
+        company: '杭州珞珈数据有限公司',
+        nativePlace: '黑龙江省海伦市',
+        phone: '18846059565',
+        email: 'guangheyang@hotmail.com',
+        sentence: '每日一句'
+      },
       form: {
         name: '',
         region: '',
@@ -123,20 +132,21 @@ export default {
     };
   },
   created() {
-    this.loading = true
-    axios.get(`http://192.168.1.30:12306/queryBlog?page=1&size=5`).then(res => {
-      console.log(res, 'res')
-      this.blogList = res.data.data
-      this.loading = false
-    }).catch(() => {
-      this.loading = false
-    })
+    this.getBlogList()
   },
   methods: {
+    getBlogList() {
+      this.loading = true
+      queryBlog({ page: 1, size: 5 }).then(res => {
+        console.log(res, 'res')
+        this.blogList = res.data
+      }).catch(() => {
+        this.loading = false
+      })
+    },
     handleClose(tag) {
       this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
     },
-
     showInput() {
       this.inputVisible = true;
       this.$nextTick(() => {
@@ -166,10 +176,11 @@ export default {
     max-width: 80rem;
     margin: 0 auto;
     .left {
-      margin-bottom: 1.75rem;
+      margin: 0 0 1.75rem 1.5rem;
       .box-card {
-        width: 100%;
+        width: calc(100% - 2rem);
         box-sizing: border-box;
+        margin: 0 auto;
         .top {
           margin-bottom: 1.5rem;
           text-align: center;
@@ -188,8 +199,8 @@ export default {
         }
         .info {
           flex: 1;
-          padding-left: 1.625rem;
           display: flex;
+          align-items: center;
           flex-wrap: wrap;
           div {
             width: 100%;
@@ -197,6 +208,8 @@ export default {
           }
           .text {
             margin-left: 0.75rem;
+            line-height: 20px;
+            height: 20px;
           }
         }
         .tag {
@@ -221,7 +234,6 @@ export default {
             width: 5.5rem;
             padding-top: 0;
             padding-bottom: 0;
-            /*margin-left: 0.625rem;*/
             margin-bottom: 0.625rem;
             vertical-align: bottom;
           }
@@ -230,11 +242,10 @@ export default {
     }
     .right {
       max-width: 55rem;
+      margin: 0 0 0 1.5rem;
       .box-card {
-        max-width: 55rem;
-        .el-tabs__content {
-          max-width: 55rem;
-        }
+        width: calc(100% - 2rem);
+        margin: 0 auto;
       }
     }
   }

@@ -45,7 +45,7 @@ export default {
             this.$refs[form].validate((valid) => {
                 if (valid) {
                     const { user_name, password } = this.form
-                    axios.post('http://192.168.1.20:12306/insertUser', {
+                    axios.post('/insertUser', {
                         user_name, password, avatar_id: Math.floor(Math.random() * 27) + 1
                     }).then(res => {
                         if (res.status) {

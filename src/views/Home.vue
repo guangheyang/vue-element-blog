@@ -3,7 +3,7 @@
       <template v-if="blogList.length > 0">
           <BlogAbstract v-for="item in blogList" :key="item.id" :blog-obj="item" @link-title="clickTitle" />
       </template>
-      <NoData v-else style="display: none" />
+      <NoData v-else />
       <div class="blog-page" v-if="showPage">
           <Page :current-page="paging.currentPage" :total-page="paging.total" @click-prev="prevPage" @click-next="nextPage" />
       </div>
@@ -66,7 +66,10 @@
           this.loading = true
           const { currentPage: page, size } = this.paging
           queryBlog({ page, size }).then(res => {
-              this.blogList = res.data
+              this.blogList = res.data || []
+              this.loading = false
+          }).catch(() => {
+              this.blogList = []
               this.loading = false
           })
       },

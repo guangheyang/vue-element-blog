@@ -20,7 +20,7 @@ export default {
     if (wrap !== null) {
       setTimeout(() => {
         document.body.removeChild(wrap);
-      }, 1000)
+      }, 3000)
     }
   }
 }

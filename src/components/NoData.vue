@@ -1,7 +1,7 @@
 <template>
-    <el-card class="box-card">
+    <div class="box-card">
         <div class="noData">暂时还没有发布相关信息</div>
-    </el-card>
+    </div>
 </template>
 <style lang="scss" scoped>
     .box-card {

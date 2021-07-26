@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 const service = axios.create({
-    baseURL: 'http://192.168.1.30:12306',
+    // baseURL: 'yangguang.he.cn:8080/person_node',
+    baseURL: 'http://192.168.0.102:12306',
     timeout: 5000
 })
 

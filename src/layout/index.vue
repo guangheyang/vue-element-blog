@@ -23,7 +23,7 @@ export default {
 
 <style lang="scss" scoped>
     .wrap {
-        min-height: 45rem;
+        min-height: 40rem;
         display: flex;
         flex-direction: column;
         justify-content: space-between;

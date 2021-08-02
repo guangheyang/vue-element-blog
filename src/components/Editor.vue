@@ -4,10 +4,10 @@
             <el-form-item label="标题" prop="title">
                 <el-input v-model="form.title" maxlength="20"></el-input>
             </el-form-item>
-            <el-form-item label="所属模块" prop="module">
+            <el-form-item label="博客状态" prop="module">
                 <el-select v-model="form.module">
-                    <el-option label="新闻动态" value="1"></el-option>
-                    <el-option label="实时热点" value="2"></el-option>
+                    <el-option label="全部可见" value="1" />
+                    <el-option label="仅自己可见" value="2" />
                 </el-select>
             </el-form-item>
             <el-form-item label="内容" prop="content" class="vab-quill-content">

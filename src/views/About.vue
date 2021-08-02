@@ -10,11 +10,12 @@
               <div class="every">{{ info.sentence }}</div>
             </div>
             <div class="info">
-              <div class="el-icon-s-platform"><span class="text">{{ info.occupation }}</span></div>
+              <div class="el-icon-s-platform"><span class="text">{{ info.occupation }} {{ info.nowYear - 2019 }}年工作经验</span></div>
               <div class="el-icon-office-building"><span class="text">{{ info.company }}</span></div>
               <div class="el-icon-location-information"><span class="text">{{ info.nativePlace }}</span></div>
               <div class="el-icon-phone-outline"><span class="text">{{ info.phone }}</span></div>
               <div class="el-icon-message"><span class="text">{{ info.email }}</span></div>
+              <div></div>
             </div>
             <el-divider />
             <div class="tag">
@@ -22,21 +23,23 @@
               <el-tag
                 :key="tag"
                 v-for="tag in dynamicTags"
-                closable
+                :closable="isPower"
                 :disable-transitions="false"
                 @close="handleClose(tag)"
               >{{tag}}</el-tag>
-              <el-input
-                class="input-new-tag"
-                v-if="inputVisible"
-                v-model="inputValue"
-                ref="saveTagInput"
-                size="small"
-                @keyup.enter.native="handleInputConfirm"
-                @blur="handleInputConfirm"
-              >
-              </el-input>
-              <el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
+              <template v-if="isPower">
+                <el-input
+                        class="input-new-tag"
+                        v-if="inputVisible"
+                        v-model="inputValue"
+                        ref="saveTagInput"
+                        size="small"
+                        @keyup.enter.native="handleInputConfirm"
+                        @blur="handleInputConfirm"
+                >
+                </el-input>
+                <el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
+              </template>
             </div>
           </el-card>
         </div>
@@ -101,6 +104,11 @@ export default {
   components: {
     LineEchart
   },
+  computed: {
+    isPower() {
+      return this.info.power === 'admin'
+    }
+  },
   data() {
     return {
       dynamicTags: ['标签一', '标签二', '标签三'],
@@ -115,7 +123,9 @@ export default {
         nativePlace: '黑龙江省海伦市',
         phone: '18846059565',
         email: 'guangheyang@hotmail.com',
-        sentence: '每日一句'
+        sentence: '每日一句',
+        nowYear: new Date().getFullYear(),
+        power: 'admin'
       },
       form: {
         name: '',

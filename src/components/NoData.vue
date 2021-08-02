@@ -5,12 +5,12 @@
 </template>
 <style lang="scss" scoped>
     .box-card {
-        height: 220px;
+        height: calc(100vh - 14rem);
         max-width: 880px;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 0 auto 270px;
+        margin: 0 auto;
         color: #C0C4CC;
     }
 </style>

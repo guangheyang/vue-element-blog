@@ -30,8 +30,11 @@ export default {
         align-items: center;
     }
     .container {
-        margin: 7.75rem 1rem 0;
+        margin: 7.75rem 0 0;
+        padding: 0 1rem;
+        box-sizing: border-box;
         overflow-x: hidden;
+        min-height: calc(100vh - 13rem);
     }
     .nav-box{
         padding:0 1.5rem;

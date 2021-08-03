@@ -19,7 +19,7 @@
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="handleSee">预览效果</el-button>
-                <el-button type="primary" @click="handleSave">保存</el-button>
+                <el-button type="primary" :loading="isClickSave" @click="handleSave">保存</el-button>
             </el-form-item>
         </el-form>
         <el-dialog title="预览效果" :visible.sync="dialogTableVisible">
@@ -33,7 +33,9 @@
 
 <script>
 import vabQuill from '@/components/plugins/vabQuill'
-import axios from 'axios'
+// import axios from 'axios'
+import { insertBlog } from '@/api/editor'
+import { message } from "@/utils/message";
 export default {
     name: 'Editor',
     components: { vabQuill },
@@ -93,6 +95,7 @@ export default {
                     },
                 ],
             },
+            isClickSave: false
         }
     },
     methods: {
@@ -117,16 +120,17 @@ export default {
                         this.borderColor = '#F56C6C'
                     }
                 })
+                this.isClickSave = true
                 if (valid) {
-                    // this.$baseMessage('submit!', 'success')
-                    console.log('submit')
-                    axios.post('http://192.168.1.20:12306/insertBlog', {
-                        title: this.form.title,
-                        data: this.form.content
-                    }).then(res => {
-                        console.log(res)
+                    const { title, content: data } = this.form
+                    insertBlog({ title, data }).then(res => {
+                        if (res.code === 20000) {
+                            message({ message: '操作成功', type: 'success' })
+                            this.$router.push({ path: '/'})
+                        }
                     })
                 } else {
+                    this.isClickSave = false
                     return false
                 }
             })

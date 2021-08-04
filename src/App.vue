@@ -15,11 +15,17 @@ export default {
       show: false
     }
   },
-  created() {
-    let wrap = document.getElementById('monster_wrap');
+  mounted() {
+    // 获取dom
+    const wrap = document.getElementById('monster_wrap');
+    const app = document.getElementById('app');
+    // 初始时隐藏#app
+    app.style.display = 'none';
+    // 动画节点存在，3s后隐藏并显示#app
     if (wrap !== null) {
       setTimeout(() => {
-        document.body.removeChild(wrap);
+        wrap.style.display = 'none';
+        app.style.display = 'block';
       }, 3000)
     }
   }

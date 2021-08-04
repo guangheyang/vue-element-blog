@@ -25,7 +25,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .page {
-    width: 880px;
+    max-width: 880px;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;

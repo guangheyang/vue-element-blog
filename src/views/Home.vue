@@ -22,7 +22,7 @@
           paging: {
               currentPage: 1,
               size: 5,
-              total: 0
+              total: 12
           },
           loading: false
       }

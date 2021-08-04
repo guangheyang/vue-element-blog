@@ -49,7 +49,7 @@
           <el-card class="box-card">
             <el-tabs v-model="activeName" @tab-click="handleClick">
               <el-tab-pane label="最新文章" name="first">
-                  <el-timeline :reverse="true">
+                  <el-timeline :reverse="false">
                     <el-timeline-item v-for="(item, index) in blogList" :key="index" :timestamp="item.createTime | timeStr" placement="top">
                       <el-card>
                         <h4 style="padding-bottom: 0.75rem">{{ item.title }}</h4>

@@ -31,9 +31,9 @@
         // 符合条件隐藏page
         showPage(){
             let result = true
-            if (this.paging.currentPage === this.paging.total) {
-                result = false
-            }
+            // if (this.paging.currentPage === this.paging.total) {
+            //     result = false
+            // }
             if (this.paging.total === 0) {
                 result = false
             }

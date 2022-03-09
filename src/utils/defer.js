@@ -9,7 +9,6 @@ export default function (maxFrameCount) {
       const refreshFrameCount = () => {
         requestAnimationFrame(() => {
           this.frameCount++
-          console.log(this.frameCount, maxFrameCount)
           if (this.frameCount < maxFrameCount) {
             refreshFrameCount()
           }

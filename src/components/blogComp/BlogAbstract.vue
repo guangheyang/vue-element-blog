@@ -4,7 +4,7 @@
       <div class="blog-info">
         <div>
           <span class="blog-author">杨光贺</span>
-          <span class="blog-created">发布于{{ props.blogObj.createTime | timeStr }}</span>
+          <span class="blog-created">发布于{{ props.blogObj.createTime | timeSecond }}</span>
         </div>
         <span class="blog-see">浏览 ({{ props.blogObj.seeNum }})</span>
       </div>
@@ -12,8 +12,12 @@
 </template>
 
 <script>
+import filter from '@/utils/filter'
 export default {
   functional:true,
+  filters: {
+    ...filter
+  },
   props: {
     blogObj: {
       type: Object,

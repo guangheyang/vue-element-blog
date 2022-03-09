@@ -14,20 +14,6 @@ export default {
     return {
       show: false
     }
-  },
-  mounted() {
-    // 获取dom
-    const wrap = document.getElementById('monster_wrap');
-    const app = document.getElementById('app');
-    // 初始时隐藏#app
-    app.style.display = 'none';
-    // 动画节点存在，3s后隐藏并显示#app
-    if (wrap !== null) {
-      setTimeout(() => {
-        wrap.style.display = 'none';
-        app.style.display = 'block';
-      }, 3000)
-    }
   }
 }
 </script>

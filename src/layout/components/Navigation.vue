@@ -1,12 +1,12 @@
 <template>
     <div class="nav-box">
         <el-row>
-            <el-col :xs="3" :sm="3" :md="4" :lg="12" :xl="12">
+            <el-col :xs="6" :sm="6" :md="4" :lg="4" :xl="4">
                 <router-link to="/" tag="div" class="logo">
                     <div class="blog">杨光贺的个人博客</div>
                 </router-link>
             </el-col>
-            <el-col :xs="21" :sm="21" :md="20" :lg="12" :xl="12">
+            <el-col :xs="18" :sm="18" :md="20" :lg="20" :xl="20">
                 <div class="nav-list hidden-xs-only">
                     <template  v-for="(path, index) in pathList">
                         <router-link :key="index" :to="path.path">{{ path.name }}</router-link>
@@ -70,8 +70,10 @@ export default {
         .logo {
             color: #fff;
             font-size: 1.25rem;
-            cursor: pointer;
             white-space: nowrap;
+            .blog {
+                cursor: pointer;
+            }
         }
     }
     .nav-list {

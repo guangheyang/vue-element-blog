@@ -1,12 +1,12 @@
 <template>
   <div class="nav-box">
-    <el-row>
-      <el-col :xs="6" :sm="6" :md="4" :lg="4" :xl="4">
+    <!-- <el-row> -->
+      <!-- <el-col :xs="6" :sm="6" :md="4" :lg="4" :xl="4"> -->
         <router-link to="/" tag="div" class="logo">
           <div class="blog">杨光贺的个人博客</div>
         </router-link>
-      </el-col>
-      <el-col :xs="18" :sm="18" :md="20" :lg="20" :xl="20">
+      <!-- </el-col>
+      <el-col :xs="18" :sm="18" :md="20" :lg="20" :xl="20"> -->
         <div class="nav-list hidden-xs-only">
           <template v-for="(path, index) in handleRouter">
             <router-link :key="index" :to="path.path">{{
@@ -30,8 +30,8 @@
             </div>
           </el-collapse-transition>
         </div>
-      </el-col>
-    </el-row>
+      <!-- </el-col> -->
+    <!-- </el-row> -->
   </div>
 </template>
 <script>
@@ -81,6 +81,7 @@ export default {
   line-height: 5rem;
   background-color: #db4d6d;
   box-sizing: border-box;
+  padding: 0 1.5rem;
   .el-row {
     width: 100vw;
   }

@@ -65,13 +65,7 @@ export default {
       }
       this.drawerChange();
       this.$router.push({ path });
-    },
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath);
-    },
+    }
   },
 };
 </script>

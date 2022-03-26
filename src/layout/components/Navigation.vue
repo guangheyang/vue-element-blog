@@ -8,21 +8,23 @@
       </el-col>
       <el-col :xs="18" :sm="18" :md="20" :lg="20" :xl="20">
         <div class="nav-list hidden-xs-only">
-          <template v-for="(path, index) in pathList">
-            <router-link :key="index" :to="path.path">{{ path.name }}</router-link>
+          <template v-for="(path, index) in handleRouter">
+            <router-link :key="index" :to="path.path">{{
+              path.meta.title
+            }}</router-link>
           </template>
         </div>
         <div class="unfold hidden-sm-and-up">
           <i class="el-icon-s-fold" @click="drawerChange" />
           <el-collapse-transition>
             <div class="menu" v-show="drawer">
-              <template v-for="(path, index) in pathList">
+              <template v-for="(path, index) in handleRouter">
                 <div
                   :key="index"
                   class="menu--item"
                   @click="clickMenuItem(path)"
                 >
-                  {{ path.name }}
+                  {{ path.meta.title }}
                 </div>
               </template>
             </div>
@@ -33,24 +35,36 @@
   </div>
 </template>
 <script>
-// import Monster from '@/components/Monster'
+import { routes } from "@/router/routes/index";
 export default {
   data() {
     return {
       drawer: false,
-      pathList: [
-        { name: "首页", path: "/", index: "1" },
-        { name: "关于", path: "/about", index: "2" },
-      ],
     };
+  },
+  computed: {
+    handleRouter() {
+      return routes.filter((r) => {
+        if (r.meta && r.meta.onlyTopShow) {
+          return {
+            path: r.path,
+            name: r.title,
+          };
+        }
+      });
+    },
   },
   methods: {
     drawerChange() {
       this.drawer = !this.drawer;
     },
-    clickMenuItem(path) {
-      this.$router.push({ path: path.path });
+    // 小尺寸时，点击icon路由跳转
+    clickMenuItem({ path }) {
+      if (this.$router.currentRoute.path === path) {
+        return this.drawerChange()
+      }
       this.drawerChange();
+      this.$router.push({ path });
     },
     handleOpen(key, keyPath) {
       console.log(key, keyPath);

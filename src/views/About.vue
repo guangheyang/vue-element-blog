@@ -183,22 +183,13 @@ export default {
 <style lang="scss" scoped>
 .about {
   max-width: 80rem;
-  margin: 0 auto;
+  margin: 0 0 0 1rem;
   .left {
-    margin: 0 0 1rem 1rem;
-    .box-card {
-      // width: calc(100% - 2rem);
-      box-sizing: border-box;
-      // margin: 0 auto;
-    }
+    margin: 0 1rem 1rem 0;
   }
   .right {
     max-width: 55rem;
-    margin: 0 0 0 1.5rem;
-    .box-card {
-      width: calc(100% - 2rem);
-      margin: 0 auto;
-    }
+    margin: 0 1rem 0 0;
   }
 }
 </style>

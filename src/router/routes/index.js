@@ -46,6 +46,11 @@ export const routes = [
   component: () => import('@/views/Register')
  },
  {
+  path: '/shadow',
+  name: 'shadow',
+  component: () => import('@/views/shadow')
+ },
+ {
   path: '*',
   redirect: '/404'
  }

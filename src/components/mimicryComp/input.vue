@@ -2,9 +2,11 @@
 <template>
   <div class="inputWrap" :class="{ focus: focus }">
     <span :data-placeholder="placeholder"></span>
+      <!-- v-model="inputData" -->
+      <div>{{ data }}</div>
     <input
       class="inputText"
-      :value="inputData"
+      :value="data"
       @input="inputChange"
       @focus="inputFocus"
       @blur="inputBlur"
@@ -28,6 +30,9 @@ export default {
       focus: false,
     };
   },
+  created() {
+    this.data = this.inputData
+  },
   methods: {
     inputFocus() {
       console.log(this.focus);
@@ -37,9 +42,9 @@ export default {
       console.log(this.focus);
       this.focus = false;
     },
-    inputChange($event) {
-      this.inputData = $event.target.value
-      console.log($event);
+    inputChange(event) {
+      this.data = event.target.value
+      // console.log(this.inputData, event.target.value);
     },
   },
 };
@@ -73,6 +78,7 @@ export default {
     background: linear-gradient(120deg, #3498db, #8e44ad);
     transition: all 0.5s;
   }
+
   .inputText {
     width: 100%;
     height: 20px;
@@ -85,7 +91,7 @@ export default {
 }
 
 .focus span::before {
-  top: -20px;
+  top: -10px;
 }
 .focus span::after {
   width: 100%;

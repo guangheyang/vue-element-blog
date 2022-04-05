@@ -4,13 +4,23 @@
       <span data-placeholder="请输入用户名或手机号"></span>
       <input class="inputText" v-model="form.user_name" @focus="inputFocus" @blur="inputBlur" />
     </div> -->
-    <template v-for="item in Object.keys(form)">
+    <!-- <template v-for="item in Object.keys(form)"> -->
       <MimicryInput
         :key="item"
-        :inputData="form[item]"
+        :inputData="form.user_name"
         placeholder="请输入用户名或手机号"
       />
-    </template>
+    <!-- </template> -->
+    <MimicryInput
+        :key="item"
+        :inputData="form.password"
+        placeholder="请输入密码"
+      />
+      <MimicryInput
+        :key="item"
+        :inputData="form.confirm_password"
+        placeholder="再次输入密码"
+      />
     <!-- <div class="inputWrap">
       <span data-placeholder="请输入密码"></span>
       <input class="inputText" v-model="form.password" show-password />

@@ -2,12 +2,9 @@
 <template>
   <div class="inputWrap" :class="{ focus: focus }">
     <span :data-placeholder="placeholder"></span>
-      <!-- v-model="inputData" -->
-      <div>{{ data }}</div>
     <input
       class="inputText"
-      :value="data"
-      @input="inputChange"
+      v-model="value"
       @focus="inputFocus"
       @blur="inputBlur"
     />
@@ -20,32 +17,30 @@ export default {
       type: String,
       default: "",
     },
-    inputData: {
-      type: [Object, String, Number],
-      default: "",
-    },
+    inputValue: {
+      type: String,
+      default: ''
+    }
   },
   data() {
     return {
       focus: false,
+      value: ''
     };
   },
   created() {
-    this.data = this.inputData
+    this.value = this.inputValue
   },
   methods: {
     inputFocus() {
-      console.log(this.focus);
       this.focus = true;
     },
     inputBlur() {
-      console.log(this.focus);
       this.focus = false;
     },
     inputChange(event) {
-      this.data = event.target.value
-      // console.log(this.inputData, event.target.value);
-    },
+      this.value = event.target.value
+    }
   },
 };
 </script>

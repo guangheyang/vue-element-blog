@@ -6,19 +6,16 @@
     </div> -->
     <!-- <template v-for="item in Object.keys(form)"> -->
       <MimicryInput
-        :key="item"
-        :inputData="form.user_name"
+        :inputValue="form.user_name"
         placeholder="请输入用户名或手机号"
       />
     <!-- </template> -->
     <MimicryInput
-        :key="item"
-        :inputData="form.password"
+        v-model="form.password"
         placeholder="请输入密码"
       />
       <MimicryInput
-        :key="item"
-        :inputData="form.confirm_password"
+        v-model="form.confirm_password"
         placeholder="再次输入密码"
       />
     <!-- <div class="inputWrap">

@@ -1,40 +1,28 @@
 <template>
   <div class="drop-shadow">
-    <!-- <div class="inputWrap" :class="{ 'focus': focus }">
-      <span data-placeholder="请输入用户名或手机号"></span>
-      <input class="inputText" v-model="form.user_name" @focus="inputFocus" @blur="inputBlur" />
-    </div> -->
-    <!-- <template v-for="item in Object.keys(form)"> -->
-      <MimicryInput
-        v-model="form.user_name"
-        placeholder="请输入用户名或手机号"
-      />
-    <!-- </template> -->
+    <MimicryInput
+      v-model="form.user_name"
+      placeholder="请输入用户名或手机号"
+    />
     <MimicryInput
         v-model="form.password"
         placeholder="请输入密码"
-      />
-      <MimicryInput
-        v-model="form.confirm_password"
-        placeholder="再次输入密码"
-      />
-    <!-- <div class="inputWrap">
-      <span data-placeholder="请输入密码"></span>
-      <input class="inputText" v-model="form.password" show-password />
-    </div>
-    <div class="inputWrap">
-      <span data-placeholder="再次输入密码"></span>
-      <input class="inputText" v-model="form.confirm_password" />
-    </div> -->
-    <div class="buttonWrap">
-      <button type="primary" @click="onSubmit('form')">立即创建</button>
-    </div>
+    />
+    <MimicryInput
+      v-model="form.confirm_password"
+      placeholder="再次输入密码"
+    />
+    <MimicryButton @click="onSubmit">立即创建</MimicryButton>
   </div>
 </template>
 <script>
 import MimicryInput from "@/components/mimicryComp/input";
+import MimicryButton from "@/components/mimicryComp/button";
 export default {
-  components: { MimicryInput },
+  components: {
+    MimicryInput,
+    MimicryButton
+  },
   data() {
     return {
       form: {
@@ -84,29 +72,6 @@ export default {
 }
 .drop-shadow:hover {
   border-radius: 20px;
-}
-
-.buttonWrap {
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  margin-top: 5rem;
-  button {
-    color: #596275;
-    border-radius: 3rem;
-    border: 0;
-    cursor: pointer;
-    box-shadow: 9px 9px 18px rgba(0, 0, 0, 0.1),
-      -9px -9px 18px rgba(255, 255, 255, 1);
-    transition: box-shadow 0.2s ease-out;
-    outline: none;
-    width: 130px;
-    height: 55px;
-  }
-  button:active {
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2),
-      -1px -1px 2px rgba(255, 255, 255, 0.8);
-  }
 }
 
 .inner-shadow {

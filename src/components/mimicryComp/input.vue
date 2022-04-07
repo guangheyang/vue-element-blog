@@ -5,6 +5,7 @@
     <input
       class="inputText"
       v-model="message"
+      :type="type"
       @input="inputChange"
       @focus="inputFocus"
       @blur="inputBlur"
@@ -21,6 +22,13 @@ export default {
     value: {
       type: String,
       default: ''
+    },
+    type: {
+      type: String,
+      default: 'text',
+      validator(val) {
+        return ['text', 'number', 'password'].includes(val)
+      }
     }
   },
   data() {
@@ -34,6 +42,7 @@ export default {
       this.focus = true;
     },
     inputBlur() {
+      if (this.message) return
       this.focus = false;
     },
     inputChange() {

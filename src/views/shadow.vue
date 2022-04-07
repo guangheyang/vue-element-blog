@@ -5,11 +5,13 @@
       placeholder="请输入用户名或手机号"
     />
     <MimicryInput
-        v-model="form.password"
-        placeholder="请输入密码"
+      v-model="form.password"
+      type="password"
+      placeholder="请输入密码"
     />
     <MimicryInput
       v-model="form.confirm_password"
+      type="password"
       placeholder="再次输入密码"
     />
     <MimicryButton @click="onSubmit">立即创建</MimicryButton>

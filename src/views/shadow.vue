@@ -6,7 +6,7 @@
     </div> -->
     <!-- <template v-for="item in Object.keys(form)"> -->
       <MimicryInput
-        :inputValue="form.user_name"
+        v-model="form.user_name"
         placeholder="请输入用户名或手机号"
       />
     <!-- </template> -->

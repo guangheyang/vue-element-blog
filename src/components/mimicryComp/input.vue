@@ -4,7 +4,8 @@
     <span :data-placeholder="placeholder"></span>
     <input
       class="inputText"
-      v-model="value"
+      v-model="message"
+      @input="inputChange"
       @focus="inputFocus"
       @blur="inputBlur"
     />
@@ -17,7 +18,7 @@ export default {
       type: String,
       default: "",
     },
-    inputValue: {
+    value: {
       type: String,
       default: ''
     }
@@ -25,11 +26,8 @@ export default {
   data() {
     return {
       focus: false,
-      value: ''
+      message: this.value
     };
-  },
-  created() {
-    this.value = this.inputValue
   },
   methods: {
     inputFocus() {
@@ -38,8 +36,8 @@ export default {
     inputBlur() {
       this.focus = false;
     },
-    inputChange(event) {
-      this.value = event.target.value
+    inputChange() {
+      this.$emit('input', this.message)
     }
   },
 };

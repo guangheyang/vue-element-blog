@@ -1,29 +1,33 @@
 <template>
-  <el-card class="box-card">
+   <div class="drop-shadow">
     <el-form :model="form" :rules="rules" ref="form" label-width="80px">
-      <el-form-item label="用户名" prop="user_name">
-        <el-input v-model="form.user_name" placeholder="请输入用户名或手机号" />
-      </el-form-item>
-      <el-form-item label="密码" prop="password">
-        <el-input
-          v-model="form.password"
-          show-password
-          placeholder="请输入密码"
-        />
-      </el-form-item>
-      <el-form-item label="确认密码" prop="confirm_password">
-        <el-input v-model="form.confirm_password" placeholder="再次输入密码" />
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="onSubmit('form')">立即创建</el-button>
-        <el-button @click="$router.go(-1)">取消</el-button>
-      </el-form-item>
+      <MimicryInput
+        v-model="form.user_name"
+        placeholder="请输入用户名或手机号"
+      />
+      <MimicryInput
+        v-model="form.password"
+        type="password"
+        placeholder="请输入密码"
+      />
+      <MimicryInput
+        v-model="form.confirm_password"
+        type="password"
+        placeholder="再次输入密码"
+      />
+      <MimicryButton @click="onSubmit">立即创建</MimicryButton>
+      <MimicryButton @click="$router.go(-1)">返回</MimicryButton>
     </el-form>
-  </el-card>
+  </div>
 </template>
 <script>
-import axios from "axios";
+import MimicryInput from "@/components/mimicryComp/input";
+import MimicryButton from "@/components/mimicryComp/button";
 export default {
+   components: {
+    MimicryInput,
+    MimicryButton,
+  },
   data() {
     return {
       form: {
@@ -67,8 +71,17 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.box-card {
-  max-width: 480px;
-  margin: 40px auto 10rem;
+.drop-shadow {
+  border-radius: 20px;
+  max-width: 416px;
+  margin: 80px auto;
+  background: #ecf0f3;
+  transition: 0.3s ease all;
+  padding: 3rem 2rem;
+  box-sizing: border-box;
+  box-shadow: 9px 9px 15px #d1d9e6, -9px -9px 15px #fff;
+}
+.drop-shadow:hover {
+  border-radius: 20px;
 }
 </style>

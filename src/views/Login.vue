@@ -1,16 +1,19 @@
 <template>
   <div class="drop-shadow">
-    <el-form :model="form" :rules="rules" ref="form" label-width="80px">
+    <Verification :model="form" :rules="rules" ref="form" label-width="80px">
       <MimicryInput
+        prop="user_name"
         v-model="form.user_name"
         placeholder="请输入用户名或手机号"
       />
       <MimicryInput
+        prop="password"
         v-model="form.password"
         type="password"
         placeholder="请输入密码"
       />
       <MimicryInput
+        prop="confirm_password"
         v-model="form.confirm_password"
         type="password"
         placeholder="再次输入密码"
@@ -18,17 +21,18 @@
       <MimicryButton @click="$router.push({ path: 'register' })">注册账号</MimicryButton>
       <MimicryButton @click="onSubmit">立即创建</MimicryButton>
       <MimicryButton @click="$router.go(-1)">返回</MimicryButton>
-    </el-form>
+    </Verification>
   </div>
 </template>
 <script>
-// import axios from "axios";
 import MimicryInput from "@/components/mimicryComp/input";
 import MimicryButton from "@/components/mimicryComp/button";
+import Verification from "@/components/verificationComp/Verification"
 export default {
   components: {
     MimicryInput,
     MimicryButton,
+    Verification
   },
   data() {
     return {
@@ -38,7 +42,7 @@ export default {
         confirm_password: "",
       },
       rules: {
-        user: [
+        user_name: [
           { required: true, message: "请输入手机号或用户名", trigger: "blur" },
         ],
         password: [

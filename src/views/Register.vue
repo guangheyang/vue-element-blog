@@ -1,5 +1,6 @@
 <template>
-   <div class="drop-shadow">
+  <div class="drop-shadow">
+    <div class="logo">logo</div>
     <el-form :model="form" :rules="rules" ref="form" label-width="80px">
       <MimicryInput
         v-model="form.user_name"
@@ -15,8 +16,10 @@
         type="password"
         placeholder="再次输入密码"
       />
-      <MimicryButton @click="onSubmit">立即创建</MimicryButton>
-      <MimicryButton @click="$router.go(-1)">返回</MimicryButton>
+      <div class="button-wrap">
+        <MimicryButton @click="onSubmit">立即创建</MimicryButton>
+        <MimicryButton @click="$router.go(-1)">返回</MimicryButton>
+      </div>
     </el-form>
   </div>
 </template>
@@ -24,7 +27,7 @@
 import MimicryInput from "@/components/mimicryComp/input";
 import MimicryButton from "@/components/mimicryComp/button";
 export default {
-   components: {
+  components: {
     MimicryInput,
     MimicryButton,
   },
@@ -36,9 +39,13 @@ export default {
         confirm_password: "",
       },
       rules: {
-        user_name: [{ required: true, message: "请输入手机号或用户名", trigger: "blur" }],
+        user_name: [
+          { required: true, message: "请输入手机号或用户名", trigger: "blur" },
+        ],
         password: [{ required: true, message: "请输入密码", trigger: "blur" }],
-        confirm_password: [{ required: true, message: "请输入密码", trigger: "change" }],
+        confirm_password: [
+          { required: true, message: "请输入密码", trigger: "change" },
+        ],
       },
     };
   },
@@ -80,6 +87,18 @@ export default {
   padding: 3rem 2rem;
   box-sizing: border-box;
   box-shadow: 9px 9px 15px #d1d9e6, -9px -9px 15px #fff;
+  .logo {
+    height: 200px;
+    line-height: 200px;
+    border: 1px solid #c3c3c3;
+    text-align: center;
+  }
+  .button-wrap {
+    display: flex;
+    align-content: center;
+    justify-content: space-around;
+    margin-top: 5rem;
+  }
 }
 .drop-shadow:hover {
   border-radius: 20px;

@@ -35,16 +35,18 @@ export default {
       let result = true
       this.propList.forEach(p => {
         const prop = p.data.attrs.prop
-        console.log(prop)
-        result = this.rules[prop].every(rule => {
-          const { required, message, trigger } = rule
-          if (required) {
-            return this.model[prop] !== ''
-          }
+        result = this.rules[prop].some(rule => {
+          const { trigger } = rule
+          // 根据trigger,实现触发方式
         })
       })
-      // console.log(result, 'res')
     },
+    // 检验规则
+    ruleExamine(rule) {
+      if (rule.required) {
+        return this.model[prop] !== ''
+      }
+    }
   },
 };
 </script>

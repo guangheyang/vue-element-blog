@@ -6,11 +6,7 @@
   </div>
 </template>
 <style lang="scss" scoped>
- .buttonWrap {
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  margin-top: 5rem;
+.buttonWrap {
   button {
     color: #596275;
     border-radius: 3rem;

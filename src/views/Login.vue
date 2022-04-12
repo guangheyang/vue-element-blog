@@ -1,5 +1,6 @@
 <template>
   <div class="drop-shadow">
+    <div class="logo">logo</div>
     <Verification :model="form" :rules="rules" ref="form" label-width="80px">
       <MimicryInput
         prop="user_name"
@@ -18,21 +19,22 @@
         type="password"
         placeholder="再次输入密码"
       />
-      <MimicryButton @click="$router.push({ path: 'register' })">注册账号</MimicryButton>
-      <MimicryButton @click="onSubmit">立即创建</MimicryButton>
-      <MimicryButton @click="$router.go(-1)">返回</MimicryButton>
+      <div class="button-wrap">
+        <MimicryButton @click="$router.push({ path: 'register' })" >注册账号</MimicryButton>
+        <MimicryButton @click="onSubmit">登录</MimicryButton>
+      </div>
     </Verification>
   </div>
 </template>
 <script>
 import MimicryInput from "@/components/mimicryComp/input";
 import MimicryButton from "@/components/mimicryComp/button";
-import Verification from "@/components/verificationComp/Verification"
+import Verification from "@/components/verificationComp/Verification";
 export default {
   components: {
     MimicryInput,
     MimicryButton,
-    Verification
+    Verification,
   },
   data() {
     return {
@@ -44,6 +46,7 @@ export default {
       rules: {
         user_name: [
           { required: true, message: "请输入手机号或用户名", trigger: "blur" },
+          { min: 1, message: "请输入手机号或用户名", trigger: "blur" },
         ],
         password: [
           { required: true, message: "请输入密码", trigger: "change" },
@@ -91,6 +94,18 @@ export default {
   padding: 3rem 2rem;
   box-sizing: border-box;
   box-shadow: 9px 9px 15px #d1d9e6, -9px -9px 15px #fff;
+  .logo {
+    height: 200px;
+    line-height: 200px;
+    border: 1px solid #c3c3c3;
+    text-align: center;
+  }
+  .button-wrap {
+    display: flex;
+    align-content: center;
+    justify-content: space-around;
+    margin-top: 5rem;
+  }
 }
 .drop-shadow:hover {
   border-radius: 20px;

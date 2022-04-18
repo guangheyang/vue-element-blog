@@ -39,14 +39,14 @@ export default {
   data() {
     return {
       form: {
-        user_name: "",
-        password: "",
-        confirm_password: "",
+        user_name: "111111",
+        password: "1",
+        confirm_password: "1",
       },
       rules: {
         user_name: [
           { required: true, message: "请输入手机号或用户名", trigger: "blur" },
-          { min: 1, message: "请输入手机号或用户名", trigger: "blur" },
+          { min: 3, max: 5, message: "请输入手机号或用户名", trigger: "blur" },
         ],
         password: [
           { required: true, message: "请输入密码", trigger: "change" },

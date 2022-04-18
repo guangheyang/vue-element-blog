@@ -1,7 +1,7 @@
 
 <template>
   <div class="inputWrap" :class="{ focus: focus }">
-    <span :data-placeholder="placeholder"></span>
+    <span :class="{ error: validate } " :data-placeholder="placeholder"></span>
     <input
       class="inputText"
       v-model="message"
@@ -34,7 +34,8 @@ export default {
   data() {
     return {
       focus: false,
-      message: this.value
+      message: this.value,
+      validate: false
     };
   },
   methods: {

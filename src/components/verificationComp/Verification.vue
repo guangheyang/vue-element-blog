@@ -27,38 +27,31 @@ export default {
         return ele;
       }
     });
-    this.validate();
   },
   methods: {
     // 任一表单项被校验后触发
-    validate() {
+    validate(valid) {
       let result = true;
       this.propList.forEach((p) => {
         const prop = p.data.attrs.prop;
-        result = this.ruleExamine(prop)
-        // console.log(trigger.slice(0, 1).toUpperCase() + trigger.slice(1), p)
-        // console.log(p.componentInstance['input' + trigger.slice(0, 1).toUpperCase() + trigger.slice(1)])
-        console.log(result, "res");
+        this.rules[prop].some((rule) => {
+          // const { trigger } = rule;
+          // // 根据trigger,实现触发方式
+          if (rule.required) {
+            if (this.model[prop] === "") result = false;
+          }
+          if (
+            (rule.min && this.model[prop].length < rule.min) ||
+            (rule.max && this.model[prop].length > rule.max)
+          ) {
+            result = false;
+          }
+        })
       });
+      return result
     },
     // 检验规则
-    ruleExamine(prop) {
-      return this.rules[prop].some((rule) => {
-        console.log(rule, 'rule')
-        // const { trigger } = rule;
-        // // 根据trigger,实现触发方式
-        if (rule.required) {
-          if (this.model[prop] === "") return false;
-        }
-        if (
-          (rule.min && this.model[prop].length < rule.min) ||
-          (rule.max && this.model[prop].length > rule.max)
-        ) {
-          return false;
-        }
-        return true;
-      });
-    },
+    ruleExamine(prop) {},
   },
 };
 </script>

@@ -21,7 +21,7 @@
       />
       <div class="button-wrap">
         <MimicryButton @click="$router.push({ path: 'register' })" >注册账号</MimicryButton>
-        <MimicryButton @click="onSubmit">登录</MimicryButton>
+        <MimicryButton @click="onSubmit('form')">登录</MimicryButton>
       </div>
     </Verification>
   </div>
@@ -59,6 +59,7 @@ export default {
   },
   methods: {
     onSubmit(form) {
+      console.log(this.$refs[form], 'over')
       this.$refs[form].validate((valid) => {
         console.log(valid, "value");
         //   if (valid) {

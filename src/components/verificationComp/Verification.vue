@@ -31,6 +31,10 @@ export default {
   methods: {
     // 任一表单项被校验后触发
     validate(valid) {
+      valid(this.ruleExamine())
+    },
+    // 检验规则
+    ruleExamine() {
       let result = true;
       this.propList.forEach((p) => {
         const prop = p.data.attrs.prop;
@@ -50,8 +54,6 @@ export default {
       });
       return result
     },
-    // 检验规则
-    ruleExamine(prop) {},
   },
 };
 </script>

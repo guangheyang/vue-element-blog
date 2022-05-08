@@ -28,7 +28,7 @@
 import Blog from "@/components/blogComp/Blog";
 import Page from "@/components/Page";
 import NoData from "@/components/NoData";
-// import { queryBlog, totalBlog } from "@/api/blog";
+import { queryBlog, totalBlog } from "@/api/blog";
 import defer from "@/utils/defer";
 export default {
   components: {
@@ -65,10 +65,10 @@ export default {
     },
   },
   created() {
-    // this.getBlogList();
-    // totalBlog().then((res) => {
-    //   this.paging.total = Math.ceil(res.data[0].total / this.paging.size);
-    // });
+    this.getBlogList();
+    totalBlog().then((res) => {
+      this.paging.total = Math.ceil(res.data[0].total / this.paging.size);
+    });
   },
   methods: {
     clickTitle(id) {
@@ -80,16 +80,16 @@ export default {
     },
     getBlogList() {
       this.loading = true;
-      // const { currentPage: page, size } = this.paging;
-      // queryBlog({ page, size })
-      //   .then((res) => {
-      //     this.blogList = res.data || [];
-      //     this.loading = false;
-      //   })
-      //   .catch(() => {
-      //     this.blogList = [];
-      //     this.loading = false;
-      //   });
+      const { currentPage: page, size } = this.paging;
+      queryBlog({ page, size })
+        .then((res) => {
+          this.blogList = res.data || [];
+          this.loading = false;
+        })
+        .catch(() => {
+          this.blogList = [];
+          this.loading = false;
+        });
     },
     prevPage(currentPage) {
       currentPage--;

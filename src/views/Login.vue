@@ -20,7 +20,9 @@
         placeholder="再次输入密码"
       />
       <div class="button-wrap">
-        <MimicryButton @click="$router.push({ path: 'register' })" >注册账号</MimicryButton>
+        <MimicryButton @click="$router.push({ path: 'register' })"
+          >注册账号</MimicryButton
+        >
         <MimicryButton @click="onSubmit('form')">登录</MimicryButton>
       </div>
     </Verification>
@@ -30,6 +32,7 @@
 import MimicryInput from "@/components/mimicryComp/input";
 import MimicryButton from "@/components/mimicryComp/button";
 import Verification from "@/components/verificationComp/Verification";
+import { queryUser } from "@/api/login";
 export default {
   components: {
     MimicryInput,
@@ -59,27 +62,22 @@ export default {
   },
   methods: {
     onSubmit(form) {
-      console.log(this.$refs[form], 'over')
       this.$refs[form].validate((valid) => {
-        console.log(valid, "value");
-        //   if (valid) {
-        //     const { user_name, password } = this.form;
-        //     ax.get(
-        //       `http://192.168.1.20:12306/queryUser?user_name=${user_name}`
-        //     ).then((res) => {
-        //       console.log(res, "res");
-        //       if (password !== res.data.data[0].password) {
-        //         alert("密码错误");
-        //       } else {
-        //         this.$router.push({
-        //           path: "/",
-        //         });
-        //       }
-        //     });
-        //   } else {
-        //     console.log("error submit!!");
-        //     return false;
-        //   }
+        if (valid) {
+          const { user_name, password } = this.form;
+          queryUser({ user_name }).thne((res) => {
+            if (password !== res.data.data[0].password) {
+              alert("密码错误");
+            } else {
+              this.$router.push({
+                path: "/",
+              });
+            }
+          });
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
       });
     },
   },
